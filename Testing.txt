@@ -1,0 +1,62 @@
+# === TESTING SECTION ===
+if __name__ == '__main__':
+    manager = DB_Manager(DATABASE)
+
+    # Step 1: Setup
+    manager.create_tables()
+    manager.default_insert()
+
+    # Step 2: Insert project
+    user_id = 1
+    project_name = "Aplikasi Discord Bot"
+    project_url = "https://github.com/user/discord-bot"
+    status_id = manager.get_status_id("In Development")
+    manager.insert_project([(user_id, project_name, project_url, status_id)])
+
+    # Step 3: Insert skills
+    manager.insert_skill(user_id, project_name, "Python")
+    manager.insert_skill(user_id, project_name, "Discord")
+
+    # Step 4: Display all statuses
+    print("\nStatus List:")
+    for status in manager.get_statuses():
+        print("-", status[0])
+
+    # Step 5: Display all skills
+    print("\nSkill List:")
+    for skill in manager.get_skills():
+        print("-", skill[1])
+
+    # Step 6: Display all projects for user_id
+    print("\nProjects for user 1:")
+    for project in manager.get_projects(user_id):
+        print(project)
+
+    # Step 7: Get project info
+    print("\nProject Info:")
+    print(manager.get_project_info(user_id, project_name))
+
+    # Step 8: Show project skills
+    print("\nProject Skills:")
+    print(manager.get_project_skills(project_name))
+
+    # Step 9: Update project name
+    new_project_name = "Discord Automation Bot"
+    manager.update_projects("project_name", (new_project_name, project_name, user_id))
+
+    print("\nAfter Project Name Update:")
+    print(manager.get_project_info(user_id, new_project_name))
+
+    # Step 10: Delete a skill from project
+    project_id = manager.get_project_id(new_project_name, user_id)
+    skill_id = manager.select_data("SELECT skill_id FROM skills WHERE skill_name = 'Discord'")[0][0]
+    manager.delete_skill(project_id, skill_id)
+
+    print("\nAfter Deleting 'Discord' Skill:")
+    print(manager.get_project_skills(new_project_name))
+
+    # Step 11: Delete the project
+    manager.delete_project(user_id, project_id)
+
+    print("\nAfter Deleting Project:")
+    print(manager.get_projects(user_id))
