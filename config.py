@@ -1,2 +1,2 @@
-TOKEN = "MTMzNDE0MjY4MzQzMzc5NTY0NQ.G8_D44.8wiTfW8MYJIhGc3QETRiHqUAgybk65kAiOISaU"
+TOKEN = "sigmaaaa"
 DATABASE = 'tutorial.db'
