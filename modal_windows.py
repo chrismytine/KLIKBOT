@@ -66,4 +66,4 @@ async def test(ctx):
     await ctx.send("Tekan tombol di bawah ini:", view=TestView())
 
 # Menjalankan bot dengan token
-bot.run('MTMzNDE0MjY4MzQzMzc5NTY0NQ.G8_D44.8wiTfW8MYJIhGc3QETRiHqUAgybk65kAiOISaU')
+bot.run('sigmaaaaskibidiii')
